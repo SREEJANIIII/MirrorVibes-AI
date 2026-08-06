@@ -1,0 +1,187 @@
+.mood-result-card{
+
+    max-width:950px;
+
+    margin:50px auto;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:45px;
+
+    box-shadow:0 15px 35px rgba(110,86,136,.12);
+
+}
+
+.mood-result-card h2{
+
+    text-align:center;
+
+    color:#6e5688;
+
+    font-size:2.3rem;
+
+    margin-bottom:40px;
+
+}
+
+.emotion-card{
+
+    background:#f6f1fb;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.emotion-card h3{
+
+    font-size:2rem;
+
+    color:#6e5688;
+
+}
+
+.emotion-card span{
+
+    color:#777;
+
+    font-size:1rem;
+
+}
+
+.section{
+
+    margin-bottom:35px;
+
+}
+
+.section h4{
+
+    color:#6e5688;
+
+    margin-bottom:12px;
+
+}
+
+.section p{
+
+    color:#555;
+
+    line-height:1.9;
+
+}
+
+.comfort{
+
+    background:#fff7fc;
+
+    padding:25px;
+
+    border-radius:20px;
+
+}
+
+.playlist-card{
+
+    background:linear-gradient(135deg,#6e5688,#8f79b8);
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    margin:35px 0;
+
+}
+
+.playlist-card h3{
+
+    font-size:1.8rem;
+
+    margin-bottom:10px;
+
+}
+
+.flow{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.flow-card{
+
+    background:#f7f3fb;
+
+    padding:20px;
+
+    border-radius:18px;
+
+}
+
+.flow-card h5{
+
+    color:#6e5688;
+
+    margin-bottom:8px;
+
+}
+
+.songs{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.song{
+
+    background:#faf8fd;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    border-left:5px solid #8f79b8;
+
+}
+
+.song h5{
+
+    font-size:1.1rem;
+
+    color:#333;
+
+}
+
+.song span{
+
+    color:#777;
+
+    font-size:.95rem;
+
+}
+
+.song p{
+
+    margin-top:10px;
+
+    font-size:.95rem;
+
+    color:#666;
+
+}

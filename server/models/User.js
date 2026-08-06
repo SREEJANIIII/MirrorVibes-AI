@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 8,
     },
+    hasLoggedIn: {
+    type: Boolean,
+    default: false
+},
   },
   {
     timestamps: true,

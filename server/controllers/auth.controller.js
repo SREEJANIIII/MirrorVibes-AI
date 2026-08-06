@@ -57,7 +57,10 @@ const login = async (req, res) => {
         expiresIn:"7d"
     }
 );
-    return res.status(200).json({ message: "Login successful", token, user: {
+const firstLogin = !user.hasLoggedIn;
+user.hasLoggedIn = true;
+await user.save();
+    return res.status(200).json({ message: "Login successful", token, firstLogin, user: {
       id: user._id,
       username: user.username,
       email: user.email

@@ -1,0 +1,69 @@
+.reflect-btn {
+    margin-top: 30px;
+
+    background: linear-gradient(135deg, #6e5688, #8a6fb5);
+    color: white;
+
+    border: none;
+    border-radius: 50px;
+
+    padding: 15px 38px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    box-shadow: 0 10px 25px rgba(110, 86, 136, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+.reflect-btn:hover {
+    background: #5b4675;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(110, 86, 136, 0.35);
+}
+
+.reflect-btn:active {
+    transform: scale(0.97);
+}
+
+.reflect-btn{
+    margin-top:20px;
+}
+
+.journal-subtitle{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:1.1rem;
+
+    line-height:1.7;
+
+    margin-bottom:35px;
+}
+
+.journal-subtitle span:first-child{
+    font-weight:600;
+    color:#555;
+}
+.music-icon{
+    font-size:2.2rem;
+    margin-right:10px;
+    vertical-align:middle;
+}
+.mood-card textarea{
+    width:100%;
+    min-height:220px;
+}

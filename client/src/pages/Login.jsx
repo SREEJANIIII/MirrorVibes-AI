@@ -19,9 +19,10 @@ const response = await axios.post(
     }
 );
 console.log(response.data);
+const firstLogin = response.data.firstLogin;
  alert("Login successful! 🎉");
 localStorage.setItem("token", response.data.token);
-navigate("/home");
+navigate("/home", { state: { firstLogin } });
 }
 catch (error) {
   alert(error.response?.data?.message || "Something went wrong!");
