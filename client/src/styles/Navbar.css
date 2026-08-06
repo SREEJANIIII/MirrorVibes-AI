@@ -1,0 +1,47 @@
+.navbar{
+    height: 80px;
+    padding: 0 70px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.logo h2{
+    font-size: 2rem;
+    font-weight: 600;
+    color: #18181b;
+}
+
+.login-btn{
+    padding: 14px 32px;
+    border: none;
+    border-radius: 40px;
+    background: #6e5688;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-btn:hover{
+    background: #59436d;
+    transform: translateY(-2px);
+}
