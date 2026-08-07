@@ -13,8 +13,6 @@ const MoodJournal = ({ setMoodResult }) => {
   }
 
   try {
-
-    // STEP 1 - Analyze Emotion
     const analysis = await axios.post(
       "http://localhost:5000/api/mood/analyze",
       {
@@ -24,7 +22,6 @@ const MoodJournal = ({ setMoodResult }) => {
 
     console.log("Emotion Analysis:", analysis.data);
 
-    // STEP 2 - Generate Playlist
     const playlist = await axios.post(
       "http://localhost:5000/api/playlist",
       {
@@ -86,8 +83,8 @@ setMoodResult(merged);
     <span>There's no right way to express yourself.</span>
 
     <span>I'm listening...</span>
+    <span> Also do mention ur favourite or preferred artists and genres </span>
 </p>
-
       <textarea
         rows="8"
         placeholder="Start writing here..."

@@ -22,16 +22,21 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 8,
     },
+
     hasLoggedIn: {
-    type: Boolean,
-    default: false
-},
+      type: Boolean,
+      default: false,
+    },
+
+    youtube: {
+      accessToken: String,
+      refreshToken: String,
+      expiryDate: Number,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema);

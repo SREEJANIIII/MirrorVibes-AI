@@ -7,29 +7,46 @@ const MoodResult = ({ mood }) => {
 
   const createYoutubePlaylist = async () => {
 
-    try {
+  try {
 
-      const response = await axios.post(
-        "http://localhost:5000/api/youtube/create",
-        {
-          playlistTitle: mood.playlistTitle,
-          playlistDescription: mood.playlistDescription,
-          songs: mood.songs,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+    const token = localStorage.getItem("token");
 
-      window.open(response.data.playlistUrl, "_blank");
+const response = await axios.post(
+  "http://localhost:5000/api/youtube/create",
+  {
+    playlistTitle: mood.playlistTitle,
+    playlistDescription: mood.playlistDescription,
+    songs: mood.songs,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
-    } catch (err) {
+    window.open(response.data.playlistUrl, "_blank");
 
-      console.error(err);
+  } catch (err) {
 
-    }
+  if (err.response?.status === 401) {
 
-  };
+  const token =
+    localStorage.getItem("token");
+
+  window.location.href =
+    `http://localhost:5000/api/youtube/login?token=${token}`;
+
+  return;
+}
+
+
+
+    console.error(err);
+
+  }
+
+};
 
   return (
 

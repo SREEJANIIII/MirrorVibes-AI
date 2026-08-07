@@ -2,8 +2,9 @@ import React from "react";
 import "../styles/Hero.css";
 import { IoMusicalNotes } from "react-icons/io5";
 import { HiArrowRight } from "react-icons/hi";
-
+import { useNavigate } from "react-router-dom";
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section className="hero">
 
@@ -20,9 +21,12 @@ const Hero = () => {
         and helps you find the music you need...
       </p>
 
-    <button className="hero-btn">
+    <button
+  className="hero-btn"
+  onClick={() => navigate("/signup")}
+>
     <IoMusicalNotes />
-    <span>Find Your Soundtrack</span>
+    <span>Find Your Reflection</span>
     <HiArrowRight />
 </button>
 

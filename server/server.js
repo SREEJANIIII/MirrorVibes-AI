@@ -28,6 +28,13 @@ app.use(
     secret: "mirrorvibes-secret-key",
     resave: false,
     saveUninitialized: false,
+
+    cookie: {
+      httpOnly: true,
+      secure: false,      // localhost
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60,
+    },
   })
 );
 app.use("/api/playlist", playlistRoutes);

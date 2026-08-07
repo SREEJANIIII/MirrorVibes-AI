@@ -1,5 +1,9 @@
 const express = require("express");
+
 const router = express.Router();
+
+const authMiddleware =
+  require("../middleware/authMiddleware");
 
 const {
   googleLogin,
@@ -7,8 +11,27 @@ const {
   createYoutubePlaylist,
 } = require("../controllers/youtubeController");
 
-router.get("/login", googleLogin);
-router.get("/callback", googleCallback);
-router.post("/create", createYoutubePlaylist);
+
+// Start Google OAuth
+router.get(
+  "/login",
+  googleLogin
+);
+
+
+// Google sends user back here
+router.get(
+  "/callback",
+  googleCallback
+);
+
+
+// Actually create playlist
+router.post(
+  "/create",
+  authMiddleware,
+  createYoutubePlaylist
+);
+
 
 module.exports = router;

@@ -4,7 +4,7 @@ import "../styles/Home.css";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import MoodJournal from "../components/MoodJournal";
-import MoodResult from "../components/MoodResultl";
+import MoodResult from "../components/MoodResult";
 
 const Home = () => {
 

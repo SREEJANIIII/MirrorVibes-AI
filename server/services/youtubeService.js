@@ -8,6 +8,12 @@ const oauth2Client = new google.auth.OAuth2(
 
 const createPlaylist = async (tokens, title, description) => {
 
+    console.log("===== createPlaylist() =====");
+    console.log("Title:", title);
+    console.log("Description:", description);
+    console.log("Access Token exists:", !!tokens.access_token);
+    console.log("Refresh Token exists:", !!tokens.refresh_token);
+
     oauth2Client.setCredentials(tokens);
 
     const youtube = google.youtube({
@@ -15,23 +21,36 @@ const createPlaylist = async (tokens, title, description) => {
         auth: oauth2Client,
     });
 
-    const response = await youtube.playlists.insert({
-        part: ["snippet", "status"],
-        requestBody: {
-            snippet: {
-                title,
-                description,
-            },
-            status: {
-                privacyStatus: "private",
-            },
-        },
-    });
+    try {
 
-    return {
-        playlistId: response.data.id,
-        youtube,
-    };
+        const response = await youtube.playlists.insert({
+            part: ["snippet", "status"],
+            requestBody: {
+                snippet: {
+                    title,
+                    description,
+                },
+                status: {
+                    privacyStatus: "private",
+                },
+            },
+        });
+
+        console.log("✅ Playlist created!");
+        console.log(response.data);
+
+        return {
+            playlistId: response.data.id,
+            youtube,
+        };
+
+    } catch (err) {
+
+        console.error("PLAYLIST INSERT ERROR");
+        console.error(JSON.stringify(err.response?.data, null, 2));
+        throw err;
+
+    }
 };
 
 const searchVideo = async (youtube, title, artist) => {
