@@ -1,38 +1,36 @@
 import "../styles/MoodResult.css";
 import axios from "axios";
+
 const MoodResult = ({ mood }) => {
 
   if (!mood) return null;
-const createYoutubePlaylist = async () => {
 
-  try {
+  const createYoutubePlaylist = async () => {
 
-    const response = await axios.post(
-      "http://localhost:5000/api/youtube/create",
-      {
-        playlistTitle: mood.playlistTitle,
-        playlistDescription: mood.playlistDescription,
-        songs: mood.songs,
-      },
-      {
-        withCredentials: true,
-      }
-    );
+    try {
 
-    window.open(response.data.playlistUrl, "_blank");
+      const response = await axios.post(
+        "http://localhost:5000/api/youtube/create",
+        {
+          playlistTitle: mood.playlistTitle,
+          playlistDescription: mood.playlistDescription,
+          songs: mood.songs,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
-  } catch (err) {
-  console.error("Frontend Error:", err);
+      window.open(response.data.playlistUrl, "_blank");
 
-  if (err.response) {
-    console.log("Status:", err.response.status);
-    console.log("Data:", err.response.data);
-  }
+    } catch (err) {
 
-  alert("Failed to create YouTube playlist.");
-}
+      console.error(err);
 
-};
+    }
+
+  };
+
   return (
 
     <section className="mood-result-card">
@@ -45,11 +43,15 @@ const createYoutubePlaylist = async () => {
 
         <span>{mood.subEmotion}</span>
 
+        <p><strong>⚡ Energy:</strong> {mood.energy}</p>
+
+        <p><strong>🎯 Listener Intent:</strong> {mood.listenerIntent}</p>
+
       </div>
 
       <div className="section">
 
-        <h4>Reflection</h4>
+        <h4>🪞 Reflection</h4>
 
         <p>{mood.reflection}</p>
 
@@ -57,7 +59,7 @@ const createYoutubePlaylist = async () => {
 
       <div className="section comfort">
 
-        <h4>A Little Reminder</h4>
+        <h4>💜 A Little Reminder</h4>
 
         <p>{mood.comfort}</p>
 
@@ -77,7 +79,7 @@ const createYoutubePlaylist = async () => {
 
         <div className="flow">
 
-          {mood.playlistFlow.map((step, index) => (
+          {mood.playlistFlow?.map((step, index) => (
 
             <div key={index} className="flow-card">
 
@@ -99,7 +101,7 @@ const createYoutubePlaylist = async () => {
 
         <div className="songs">
 
-          {mood.songs.map((song, index) => (
+          {mood.songs?.map((song, index) => (
 
             <div key={index} className="song">
 
@@ -120,16 +122,14 @@ const createYoutubePlaylist = async () => {
         </div>
 
       </div>
-<div className="export-buttons">
 
-  <button
-    className="youtube-btn"
-    onClick={createYoutubePlaylist}
-  >
-    ▶ Export to YouTube
-  </button>
+      <button
+        className="youtube-btn"
+        onClick={createYoutubePlaylist}
+      >
+        ▶ Export to YouTube
+      </button>
 
-</div>
     </section>
 
   );

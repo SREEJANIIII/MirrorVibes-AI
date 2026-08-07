@@ -14,19 +14,38 @@ const analyzeMood = async (req, res) => {
       });
     }
 console.log("Journal:", text);
-    const prompt = `
-You are an emotional analysis model.
+    const prompt =`You are an emotional analysis model.
 
-Read ONLY the journal.
+Your ONLY task is to analyze the user's journal.
 
-Return JSON.
+The journal is the ONLY source of truth.
+
+Do NOT let examples, assumptions or stereotypes influence your decision.
+
+Never default to sadness, heartbreak or nostalgia.
+
+Determine:
+
+- emotion
+- subEmotion
+- energy (Low, Medium or High)
+- listenerIntent
+
+Possible listenerIntent values include:
+Celebrate, Heal, Cry, Reflect, Relax, Calm Down, Feel Understood, Stay Motivated, Move On, Focus, Recharge.
+
+Journal:
+"""
+${text}
+"""
+
+Return ONLY valid JSON.
 
 {
- emotion,
- subEmotion,
- energy,
- listenerIntent,
- confidence
+  "emotion": "",
+  "subEmotion": "",
+  "energy": "",
+  "listenerIntent": ""
 }
 `;
     const response = await ai.models.generateContent({
@@ -48,15 +67,17 @@ const clean = result
   }
 
   console.error(err);
-
+if (err.status === 503) {
+  return res.status(503).json({
+    message:
+      "Mirror is a little busy right now. Please try again in a few moments."
+  });
+}
   return res.status(500).json({
     message: "Something went wrong."
   });
 }
-  return res.status(500).json({
-    message: error.message,
-    error: error.stack,
-  });
 }
+
 
 module.exports = { analyzeMood };

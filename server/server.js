@@ -8,6 +8,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth.routes");
 const moodRoutes = require("./routes/moodRoutes");
 const youtubeRoutes = require("./routes/youtubeRoutes");
+const playlistRoutes = require("./routes/playlistRoutes");
 
 connectDB();
 
@@ -29,6 +30,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use("/api/playlist", playlistRoutes);
 
 app.get("/", (req, res) => {
   res.send("MirrorVibes Backend Running 🚀");
