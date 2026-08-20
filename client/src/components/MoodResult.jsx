@@ -1,52 +1,9 @@
+import { useState } from "react";
 import "../styles/MoodResult.css";
 import axios from "axios";
-import SpotifyPlayer from "../components/SpotifyPlayer";
 const MoodResult = ({ mood }) => {
-
+const [spotifySaved, setSpotifySaved] = useState(null);
   if (!mood) return null;
-
-  const createYoutubePlaylist = async () => {
-
-  try {
-
-    const token = localStorage.getItem("token");
-
-const response = await axios.post(
-  "http://localhost:5000/api/youtube/create",
-  {
-    playlistTitle: mood.playlistTitle,
-    playlistDescription: mood.playlistDescription,
-    songs: mood.songs,
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
-
-    window.open(response.data.playlistUrl, "_blank");
-
-  } catch (err) {
-
-  if (err.response?.status === 401) {
-
-  const token =
-    localStorage.getItem("token");
-
-  window.location.href =
-    `http://localhost:5000/api/youtube/login?token=${token}`;
-
-  return;
-}
-
-
-
-    console.error(err);
-
-  }
-
-};
 
 const saveSpotifyPlaylist = async () => {
   try {
@@ -78,9 +35,12 @@ const saveSpotifyPlaylist = async () => {
       );
     }
 
-    alert(
-      `💚 Saved ${response.data.matchedSongs.length} songs to Spotify!`
-    );
+  setSpotifySaved({
+  count: response.data.matchedSongs.length,
+  total: mood.songs.length,
+  unmatched: response.data.unmatchedSongs,
+  url: response.data.playlistUrl,
+});
 
   } catch (err) {
     console.error(
@@ -196,19 +156,46 @@ const saveSpotifyPlaylist = async () => {
         </div>
 
       </div>
-<SpotifyPlayer songs={mood.songs} />
-<button
-  className="spotify-btn"
-  onClick={saveSpotifyPlaylist}
->
-  💚 Save to Spotify
-</button>
-      <button
-        className="youtube-btn"
-        onClick={createYoutubePlaylist}
-      >
-        ▶ Export to YouTube
-      </button>
+<div className="playlist-actions">
+
+  <button
+    className="mv-btn"
+    onClick={saveSpotifyPlaylist}
+  >
+    Save to Spotify
+  </button>
+
+</div>
+{spotifySaved && (
+  <div className="spotify-success">
+    <h3>Saved to Spotify!</h3>
+
+    <p>
+  {spotifySaved.count} of {spotifySaved.total} songs
+  were added successfully.
+</p>
+
+{spotifySaved.unmatched?.length > 0 && (
+  <p className="spotify-unmatched">
+    {spotifySaved.unmatched.length} song
+    {spotifySaved.unmatched.length > 1 ? "s" : ""} 
+    couldn't be found on Spotify.
+  </p>
+)}
+
+    <button
+      className="mv-btn"
+      onClick={() =>
+        window.open(
+          spotifySaved.url,
+          "_blank"
+        )
+      }
+    >
+      Open Spotify Playlist →
+    </button>
+  </div>
+)}
 
     </section>
 

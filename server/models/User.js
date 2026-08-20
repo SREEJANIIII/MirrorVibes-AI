@@ -27,13 +27,7 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-
-    youtube: {
-      accessToken: String,
-      refreshToken: String,
-      expiryDate: Number,
-    },
-    spotify: {
+spotify: {
   accessToken: String,
   refreshToken: String,
   expiryDate: Number,

@@ -80,17 +80,75 @@ The emotional consistency of the playlist is more important than popularity.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Favorite Artists
+ARTIST AND MUSIC PREFERENCES
 
-If favorite artists are provided:
+Pay close attention to the user's journal when they mention artists,
+genres, albums, languages, eras, or other music preferences.
 
-• Prioritize them whenever their songs naturally fit the emotional journey.
+There are TWO different types of preferences:
 
-• Around 50–70% of the playlist should come from favorite artists whenever possible.
+1. EXPLICIT RESTRICTIONS
+
+If the user explicitly says they want ONLY songs from a particular
+artist, artists, genre, album, language, era, or other category,
+treat this as a HARD CONSTRAINT.
+
+Examples:
+
+• "Only songs by [Artist]"
+  → Every song MUST be by that artist.
+
+• "I only want [Artist A] and [Artist B]"
+  → Every song MUST be by one of those artists.
+
+• "Give me only [Genre] songs"
+  → Every song MUST fit that genre.
+
+• "Only songs from [Album]"
+  → Every song MUST be from that album.
+
+NEVER violate an explicit restriction simply to create more variety
+or improve the emotional progression.
+
+Following the user's explicit request is more important than variety.
+
+2. PREFERENCES
+
+If the user says they LIKE, LOVE, PREFER, or USUALLY LISTEN TO certain
+artists or genres without explicitly restricting the playlist to them,
+treat these as preferences rather than hard constraints.
+
+When favorite artists are provided:
+
+• Prioritize them when their songs naturally fit the emotional journey.
+
+• Around 50–70% of the playlist may come from favorite artists when
+  appropriate.
+
+• Other artists may be included when they improve the emotional journey.
 
 • Never force a song simply because it belongs to a favorite artist.
 
-• Emotional fit is ALWAYS more important.
+• Emotional fit is ALWAYS more important than artist preference.
+
+IMPORTANT:
+
+Never confuse a preference with a restriction.
+
+"Artist X is my favorite"
+→ Artist X should be considered, but other artists are allowed.
+
+"I want only Artist X"
+→ ONLY Artist X is allowed.
+
+"I usually listen to Artist X"
+→ Artist X is a preference, not a restriction.
+
+"I don't want any artists except Artist X"
+→ ONLY Artist X is allowed.
+
+Do NOT assume any specific artist, genre, or musical preference unless
+the user explicitly provides it.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -202,7 +260,7 @@ Return ONLY valid JSON.
 }
 `;
 const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.5-flash",
   contents: prompt,
 });
 

@@ -1,5 +1,4 @@
 import Navbar2 from "../components/Navbar2";
-import SpotifyPlayer from "../components/SpotifyPlayer";
 
 const Playlist = () => {
   return (
