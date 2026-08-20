@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/MoodResult.css";
 import axios from "axios";
 const MoodResult = ({ mood }) => {
 const [spotifySaved, setSpotifySaved] = useState(null);
   if (!mood) return null;
+  useEffect(() => {
+  setSpotifySaved(null);
+}, [mood]);
 
 const saveSpotifyPlaylist = async () => {
   try {
@@ -28,20 +31,14 @@ const saveSpotifyPlaylist = async () => {
       response.data
     );
 
-    if (response.data.playlistUrl) {
-      window.open(
-        response.data.playlistUrl,
-        "_blank"
-      );
-    }
 
-  setSpotifySaved({
+
+setSpotifySaved({
   count: response.data.matchedSongs.length,
   total: mood.songs.length,
   unmatched: response.data.unmatchedSongs,
   url: response.data.playlistUrl,
 });
-
   } catch (err) {
     console.error(
       "Spotify playlist error:",
@@ -171,17 +168,17 @@ const saveSpotifyPlaylist = async () => {
     <h3>Saved to Spotify!</h3>
 
     <p>
-  {spotifySaved.count} of {spotifySaved.total} songs
-  were added successfully.
-</p>
+      {spotifySaved.count} of {spotifySaved.total} songs
+      were added successfully.
+    </p>
 
-{spotifySaved.unmatched?.length > 0 && (
-  <p className="spotify-unmatched">
-    {spotifySaved.unmatched.length} song
-    {spotifySaved.unmatched.length > 1 ? "s" : ""} 
-    couldn't be found on Spotify.
-  </p>
-)}
+    {spotifySaved.unmatched?.length > 0 && (
+      <p className="spotify-unmatched">
+        {spotifySaved.unmatched.length} song
+        {spotifySaved.unmatched.length > 1 ? "s" : ""}
+        couldn't be found on Spotify.
+      </p>
+    )}
 
     <button
       className="mv-btn"
