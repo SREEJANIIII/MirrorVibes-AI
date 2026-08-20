@@ -33,6 +33,11 @@ const UserSchema = new mongoose.Schema(
       refreshToken: String,
       expiryDate: Number,
     },
+    spotify: {
+  accessToken: String,
+  refreshToken: String,
+  expiryDate: Number,
+},
   },
   {
     timestamps: true,

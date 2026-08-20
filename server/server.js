@@ -9,6 +9,7 @@ const authRoutes = require("./routes/auth.routes");
 const moodRoutes = require("./routes/moodRoutes");
 const youtubeRoutes = require("./routes/youtubeRoutes");
 const playlistRoutes = require("./routes/playlistRoutes");
+const spotifyRoutes = require("./routes/spotifyRoutes");
 
 connectDB();
 
@@ -46,7 +47,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/mood", moodRoutes);
 app.use("/api/youtube", youtubeRoutes);
-
+app.use("/api/spotify", spotifyRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
