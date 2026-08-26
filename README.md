@@ -1,4 +1,5 @@
-##Features
+# MIRRORVIBES
+# Features
 
 ### Mood Journal
 
@@ -78,7 +79,7 @@ The frontend and backend were deployed separately using Vercel and Render.
 This also introduced production-specific problems such as CORS configuration, environment variables, Linux file-path case sensitivity, missing backend dependencies, and Spotify redirect URLs.
 
 
-## Tech Stack
+# Tech Stack
 
 ### Frontend
 
@@ -119,7 +120,7 @@ This also introduced production-specific problems such as CORS configuration, en
 - MongoDB Atlas
 
 
-## Project Structure
+# Project Structure
 
 ```text
 MirrorVibes-AI/
@@ -144,7 +145,7 @@ MirrorVibes-AI/
 ```
 
 
-## Run Locally
+# Run Locally
 
 ### 1. Clone the repository
 
@@ -168,7 +169,7 @@ npm install
 ```
 
 
-## Environment Variables
+### Environment Variables
 
 MirrorVibes requires separate environment variables for the frontend and backend.
 
@@ -209,7 +210,7 @@ SPOTIFY_REDIRECT_URI=http://127.0.0.1:5000/api/spotify/callback
 Never commit `.env` files or API credentials to GitHub.
 
 
-## Getting Your Own Gemini API Key
+### Getting Your Own Gemini API Key
 
 To run the project with your own Gemini account:
 
@@ -224,7 +225,7 @@ GEMINI_API_KEY=your_key_here
 The Gemini key should remain on the backend.
 
 
-## Getting Your Own Spotify Credentials
+### Getting Your Own Spotify Credentials
 
 To use Spotify integration with your own account:
 
@@ -249,7 +250,7 @@ as the Spotify redirect URI.
 For your own deployed backend, replace it with your Render backend URL and register that exact URI in Spotify.
 
 
-## MongoDB
+### MongoDB
 
 Create a MongoDB Atlas cluster and database user, then add the connection string to:
 
@@ -260,7 +261,7 @@ MONGO_URI=your_mongodb_connection_string
 The MongoDB credentials must never be committed to the repository.
 
 
-## Running the Project
+### Running the Project
 
 Start the backend:
 
@@ -283,7 +284,7 @@ http://localhost:5173
 ```
 
 
-## Deployment
+### Deployment
 
 The current deployment uses:
 
@@ -308,7 +309,7 @@ VITE_API_URL=https://your-render-backend-url
 The backend API credentials are stored as environment variables in Render.
 
 
-## Current Status
+# Current Status
 
 MirrorVibes is currently deployed and functional.
 
@@ -323,7 +324,7 @@ The current version includes:
 - Production deployment
 
 
-## Planned
+# Planned
 
 The next major feature I am working on is persistent user data.
 
@@ -338,7 +339,7 @@ This will allow users to:
 These features will use MongoDB and Mongoose and will be connected to the authenticated user's account.
 
 
-## What I Am Learning Through This Project
+# What I Am Learning Through This Project
 
 Building MirrorVibes has been my way of learning full-stack development through an actual project.
 
@@ -361,7 +362,7 @@ Some of the concepts I have worked with include:
 The project is still evolving as I learn and add new features.
 
 
-## Author
+# Author
 
 **Sreejani Bhattacharya**
 
