@@ -6,7 +6,7 @@ const Journal = () => {
       <Navbar2 />
 
       <main className="home">
-        <h1>📖 My Journal</h1>
+        <h1>My Journal</h1>
 
         <p>
           Your previous reflections and moods will appear here.

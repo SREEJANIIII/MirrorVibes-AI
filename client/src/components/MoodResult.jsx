@@ -74,15 +74,15 @@ setSpotifySaved({
 
         <span>{mood.subEmotion}</span>
 
-        <p><strong>⚡ Energy:</strong> {mood.energy}</p>
+        <p><strong>Energy:</strong> {mood.energy}</p>
 
-        <p><strong>🎯 Listener Intent:</strong> {mood.listenerIntent}</p>
+        <p><strong>Listener Intent:</strong> {mood.listenerIntent}</p>
 
       </div>
 
       <div className="section">
 
-        <h4>🪞 Reflection</h4>
+        <h4>🪞Reflection</h4>
 
         <p>{mood.reflection}</p>
 
@@ -90,7 +90,7 @@ setSpotifySaved({
 
       <div className="section comfort">
 
-  <h4>💜 A Little Reminder</h4>
+  <h4>A Little Reminder</h4>
 
   <p>{mood.comfort}</p>
 
@@ -108,7 +108,7 @@ setSpotifySaved({
 
       <div className="section">
 
-        <h4>✨ Playlist Journey</h4>
+        <h4>Playlist Journey</h4>
 
         <div className="flow">
 
@@ -130,7 +130,7 @@ setSpotifySaved({
 
       <div className="section">
 
-        <h4>🎧 Curated Playlist</h4>
+        <h4>Curated Playlist</h4>
 
         <div className="songs">
 

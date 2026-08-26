@@ -29,7 +29,7 @@ const response = await axios.post(
         password
     }
 );
- alert("Signup successful! 🎉");
+ alert("Signup successful!");
 navigate("/login");
 }
 catch (error) {
