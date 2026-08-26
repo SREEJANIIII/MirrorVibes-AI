@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import "../styles/MoodResult.css";
+import ArtistReflection from "./ArtistReflection";
 import axios from "axios";
 const MoodResult = ({ mood }) => {
 const [spotifySaved, setSpotifySaved] = useState(null);
-  if (!mood) return null;
   useEffect(() => {
   setSpotifySaved(null);
 }, [mood]);
-
+if (!mood) return null;
 const saveSpotifyPlaylist = async () => {
   try {
     const token = localStorage.getItem("token");
 
     const response = await axios.post(
-      "http://localhost:5000/api/spotify/save-playlist",
+      `${import.meta.env.VITE_API_URL}/api/spotify/save-playlist`,
       {
         playlistTitle: mood.playlistTitle,
         playlistDescription: mood.playlistDescription,
@@ -50,7 +50,7 @@ setSpotifySaved({
         localStorage.getItem("token");
 
       window.location.href =
-        `http://localhost:5000/api/spotify/login?token=${token}`;
+  `${import.meta.env.VITE_API_URL}/api/spotify/login?token=${token}`;;
 
       return;
     }
@@ -90,11 +90,13 @@ setSpotifySaved({
 
       <div className="section comfort">
 
-        <h4>💜 A Little Reminder</h4>
+  <h4>💜 A Little Reminder</h4>
 
-        <p>{mood.comfort}</p>
+  <p>{mood.comfort}</p>
 
-      </div>
+</div>
+
+<ArtistReflection mood={mood.emotion} />
 
       <div className="playlist-card">
 
