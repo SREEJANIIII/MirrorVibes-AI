@@ -48,10 +48,31 @@ Return ONLY valid JSON.
   "listenerIntent": ""
 }
 `;
-    const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
-  contents: prompt,
-});
+const generateWithRetry = async (prompt) => {
+  const maxRetries = 3;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await ai.models.generateContent({
+        model: "gemini-3.5-flash",
+        contents: prompt,
+      });
+    } catch (err) {
+      if (err.status === 503 && attempt < maxRetries) {
+        const delay = attempt * 5000;
+
+        console.log(
+          `Gemini temporarily unavailable. Retrying in ${delay / 1000}s...`
+        );
+
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+};
+   const response = await generateWithRetry(prompt);
 const result = response.text;
 const clean = result
   .replace(/```json/g, "")
