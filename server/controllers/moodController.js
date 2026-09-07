@@ -54,7 +54,7 @@ const generateWithRetry = async (prompt) => {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       return await ai.models.generateContent({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.4-flash",
         contents: prompt,
       });
     } catch (err) {

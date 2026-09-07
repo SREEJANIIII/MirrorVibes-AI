@@ -8,7 +8,7 @@ const generateWithFallback = async (prompt) => {
     console.log("Trying Gemini 3.6 Flash...");
 
     return await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+      model: "gemini-3.4-flash",
       contents: prompt,
     });
   } catch (err) {
