@@ -12,7 +12,17 @@ const generateWithRetry = async (prompt) => {
         model: "gemini-3.6-flash",
         contents: prompt,
       });
+
     } catch (err) {
+
+      // 429 = quota/rate limit
+      // DO NOT retry if daily quota is exhausted
+      if (err.status === 429) {
+        console.error("❌ Gemini quota exceeded.");
+        throw err;
+      }
+
+      // 503 = temporary model unavailability
       if (err.status === 503 && attempt < maxRetries) {
         const delay = attempt * 5000;
 
@@ -20,10 +30,14 @@ const generateWithRetry = async (prompt) => {
           `Gemini temporarily unavailable. Retrying in ${delay / 1000}s...`
         );
 
-        await new Promise((resolve) => setTimeout(resolve, delay));
-      } else {
-        throw err;
+        await new Promise((resolve) =>
+          setTimeout(resolve, delay)
+        );
+
+        continue;
       }
+
+      throw err;
     }
   }
 };
