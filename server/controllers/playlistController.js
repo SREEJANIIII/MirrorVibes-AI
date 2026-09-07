@@ -3,7 +3,30 @@ const { GoogleGenAI } = require("@google/genai");
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
+const generateWithRetry = async (prompt) => {
+  const maxRetries = 3;
 
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await ai.models.generateContent({
+        model: "gemini-3.6-flash",
+        contents: prompt,
+      });
+    } catch (err) {
+      if (err.status === 503 && attempt < maxRetries) {
+        const delay = attempt * 5000;
+
+        console.log(
+          `Gemini temporarily unavailable. Retrying in ${delay / 1000}s...`
+        );
+
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+};
 const generatePlaylist = async (req, res) => {
     console.log("🔥 PLAYLIST CONTROLLER HIT");
   console.log(req.body);
@@ -259,11 +282,7 @@ Return ONLY valid JSON.
   ]
 }
 `;
-const response = await ai.models.generateContent({
-  model: "gemini-3.6-flash",
-  contents: prompt,
-});
-
+const response = await generateWithRetry(prompt);
 const result = response.text;
 
 const clean = result
