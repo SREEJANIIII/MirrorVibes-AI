@@ -3,42 +3,27 @@ const { GoogleGenAI } = require("@google/genai");
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
-const generateWithRetry = async (prompt) => {
-  const maxRetries = 3;
+const generateWithFallback = async (prompt) => {
+  try {
+    console.log("Trying Gemini 3.6 Flash...");
 
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
+    return await ai.models.generateContent({
+      model: "gemini-3.6-flash",
+      contents: prompt,
+    });
+  } catch (err) {
+    console.error("Gemini 3.6 failed:", err.status);
+
+    if (err.status === 503) {
+      console.log("Falling back to Gemini 3.5 Flash-Lite...");
+
       return await ai.models.generateContent({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.5-flash-lite",
         contents: prompt,
       });
-
-    } catch (err) {
-
-      // 429 = quota/rate limit
-      // DO NOT retry if daily quota is exhausted
-      if (err.status === 429) {
-        console.error("❌ Gemini quota exceeded.");
-        throw err;
-      }
-
-      // 503 = temporary model unavailability
-      if (err.status === 503 && attempt < maxRetries) {
-        const delay = attempt * 5000;
-
-        console.log(
-          `Gemini temporarily unavailable. Retrying in ${delay / 1000}s...`
-        );
-
-        await new Promise((resolve) =>
-          setTimeout(resolve, delay)
-        );
-
-        continue;
-      }
-
-      throw err;
     }
+
+    throw err;
   }
 };
 const generatePlaylist = async (req, res) => {
@@ -296,7 +281,7 @@ Return ONLY valid JSON.
   ]
 }
 `;
-const response = await generateWithRetry(prompt);
+const response = await generateWithFallback(prompt);
 const result = response.text;
 
 const clean = result
